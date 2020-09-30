@@ -6,12 +6,20 @@ import ui
 def main():
     db_initialize()
 
-    add_artist()
+    menu_selection = ''
+    while menu_selection.lower() != 'q':
+        menu_selection = ui.display_menu()
 
-    data = display_artists()
-    ui.display_artists(data)
+        if menu_selection == '1':
+            add_artist()
+        elif menu_selection == '2':
+            data = display_artists()
+            ui.display_artists(data)
+        else:
+            ui.message('This is not an available selection, try again.')
+        
 
-
+    ui.quit()
 
 
 # def display_artwork():
