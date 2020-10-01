@@ -11,13 +11,20 @@ def main():
         menu_selection = ui.display_menu()
 
         if menu_selection == '1':
-            add_artist()
+            artist_name = ui.get_artist_name()
+            artist_email = ui.get_artist_email()
+            response = add_artist((artist_name, artist_email))
+            ui.message(response)
         elif menu_selection == '2':
-            data = display_artists()
+            response = add_artwork()
+            ui.message(response)
+        elif menu_selection == '3':
+            data = select_artists()
             ui.display_artists(data)
-        else:
-            ui.message('This is not an available selection, try again.')
-        
+        elif menu_selection == '4':
+            artist_id = ui.get_artist_id()
+            data = select_artworks(artist_id)
+            ui.display_artworks(data)
 
     ui.quit()
 
