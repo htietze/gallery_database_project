@@ -38,8 +38,16 @@ def get_artist_email():
     email = email.strip()
     return (email)
 
-# def get_artwork_info():
-
+def get_artwork_info():
+    while True:
+        artist_id = input('Enter artist\'s ID: ')
+        artwork_name = input('Enter artwork title: ')
+        price = float(input('Enter price: '))
+        availability = input('Is it available for sale? True or False: ')
+        
+        data = (artist_id, artwork_name, price, availability)
+    print(data)
+    return data
 
 def get_artist_id():
     while True:

@@ -16,7 +16,8 @@ def main():
             response = add_artist((artist_name, artist_email))
             ui.message(response)
         elif menu_selection == '2':
-            response = add_artwork()
+            artwork_data = ui.get_artwork_info()
+            response = add_artwork(artwork_data)
             ui.message(response)
         elif menu_selection == '3':
             data = select_artists()
@@ -25,7 +26,8 @@ def main():
             artist_id = ui.get_artist_id()
             data = select_artworks(artist_id)
             ui.display_artworks(data)
-
+        # elif menu_selection == '5':
+            
     ui.quit()
 
 
