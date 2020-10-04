@@ -14,6 +14,7 @@ def display_menu():
 
     return(input("Enter selection: "))
 
+# UI stuff for displaying the results from database queries as well as messages to the user
 def display_artists(artists):
     for artist in artists:
         print(artist)
@@ -22,6 +23,8 @@ def display_artworks(artworks):
     for x in artworks:
         print(x)
 
+# Also includes methods for getting user input, and throws them into validation
+# which I'm unsure if that's right.
 def get_artist_name():
     is_valid = False
     while not is_valid:
@@ -38,15 +41,39 @@ def get_artist_email():
     email = email.strip()
     return (email)
 
+# way too long, but I'm not sure how to split it up or do better validation here.
 def get_artwork_info():
     while True:
-        artist_id = input('Enter artist\'s ID: ')
-        artwork_name = input('Enter artwork title: ')
-        price = float(input('Enter price: '))
-        availability = input('Is it available for sale? True or False: ')
-        
-        data = (artist_id, artwork_name, price, availability)
-    print(data)
+        try:
+            artist_id = int(input('Enter artist\'s ID: '))
+            if artist_id <= 0:
+                raise ValueError
+            else:
+                break
+        except ValueError:
+            message('Please enter a positive integer.')
+
+    artwork_name = input('Enter artwork title: ')
+
+    while True:
+        try:
+            price = float(input('Enter price: '))
+            break
+        except ValueError:
+            message('Please enter a positive integer.')
+
+    while True:
+        availability = input('Is it available for sale? yes or no: ')
+        if availability.lower() == 'yes':
+            availability = True
+            break
+        elif availability.lower() == 'no':
+            availability = False
+            break
+        else:
+            message('Please enter yes or no.')
+
+    data = (artist_id, artwork_name, price, availability)
     return data
 
 def get_artist_id():

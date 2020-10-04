@@ -3,17 +3,16 @@ from config import db_path
 import os
 from db_initial import Artist, Artwork
 
-db_path = os.path.join('database', db_path)
-db = SqliteDatabase(db_path)
-
 def add_artist(data):
     artist = Artist(name=data[0], email=data[1])
     try:
         artist.save()
         return 'Artist added'
     except IntegrityError:
-        return('That artist is already entered.')
-
+        # I don't understand why I can't raise the custom pass exception without the
+        # program just ending and the test needs it to be raised as opposed to excepted?
+        raise DatabaseError
+        # return('That artist is already entered.')
 
 def add_artwork(data):
     artwork = Artwork(artist_id=data[0], artwork_name=data[1], price=data[2], availability=data[3])
@@ -21,8 +20,8 @@ def add_artwork(data):
         artwork.save()
         return 'Artwork added'
     except IntegrityError as err:
-        return(f'Unable to add artwork: {err}')
-
+        # return(f'Unable to add artwork: {err}')
+        raise DatabaseError
 
 def select_artists():
     artists = Artist.select()
